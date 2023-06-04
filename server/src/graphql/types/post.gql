@@ -1,0 +1,7 @@
+type Post {
+  name: String
+}
+
+type Query {
+  posts: [Post]
+}
