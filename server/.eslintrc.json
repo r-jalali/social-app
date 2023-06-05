@@ -1,0 +1,12 @@
+{
+  "env": {
+    "node": true
+  },
+  "plugins": ["node", "graphql", "mongodb"],
+  "extends": [
+    "eslint:recommended",
+    "plugin:node/recommended",
+    "plugin:mongodb/recommended",
+    "plugin:graphql/recommended"
+  ]
+}

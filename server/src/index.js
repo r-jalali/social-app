@@ -7,7 +7,6 @@ const { applyMiddleware } = require("graphql-middleware");
 const typeDefs = require("./graphql/typeDefs");
 const resolvers = require("./graphql/resolvers");
 const permissions = require("./graphql/permissions");
-const { GraphQLError } = require("graphql");
 
 async function startApolloServer() {
   await mongoose.connect("mongodb://localhost:27017/social", {
