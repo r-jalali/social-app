@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 const jwt = require("jsonwebtoken");
 const createApolloServer = require("../server");
 const User = require("../models/user");
+const { isArray } = require("lodash");
 
 var url, server;
 
@@ -100,5 +101,30 @@ describe("Testing user creation", () => {
     expect(response.status).toBe(200);
     expect(response.body.errors).toBeDefined();
     expect(response.body.errors?.[0]?.message).toMatch(/valid/i);
+  });
+});
+
+describe("testing users resolver", () => {
+  it("should return users list", async () => {
+    const response = await request(url)
+      .post("/")
+      .send({
+        query: `query  {
+        users {
+          email id
+        }
+      }`,
+      });
+
+    expect(response.status).toBe(200);
+    expect(response.body.data.users).toBeDefined();
+    expect(isArray(response.body.data.users)).toBe(true);
+
+    response.body.data.users.every((user) =>
+      expect(user).toMatchObject({
+        email: expect.any(String),
+        id: expect.any(String),
+      })
+    );
   });
 });
